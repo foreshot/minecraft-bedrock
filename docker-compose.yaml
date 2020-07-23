@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  download:
+    image: docker.pkg.github.com/foreshot/minecraftbedrockedition/package:${MINECRAFT_VERSION}
+    build:
+      context: ./server
+      target: download
+      args:
+        MINECRAFT_VERSION: ${MINECRAFT_VERSION}
+  minecraft:
+    image: docker.pkg.github.com/foreshot/minecraftbedrockedition/server:${MINECRAFT_VERSION}
+    build:
+      context: ./server
+      target: server
+      args:
+        MINECRAFT_VERSION: ${MINECRAFT_VERSION}
+    ports: 
+      - "29132:19132/udp"
+      - "29133:19133/udp"
+    volumes:
+      - config:/var/minecraft/
+      - minecraft:/opt/minecraft/worlds
+
+volumes:
+  config:
+  minecraft:
