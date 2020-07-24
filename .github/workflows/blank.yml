@@ -50,7 +50,7 @@ jobs:
         # Always attempt to pull a newer version of the image
         always_pull: true
         # Comma-delimited list of build-time variables
-        build_args: MINECRAFT_VERSION=${{ github.ref GITHUB_REF/refs\/tags\// }}
+        build_args: MINECRAFT_VERSION=${{ env.MINECRAFT_VERSION }}
         # Comma-delimited list of images to consider as cache sources
         #cache_froms: # optional
         # Comma-delimited list of labels to add to the built image
