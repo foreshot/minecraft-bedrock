@@ -20,6 +20,9 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      
+    - name: Set env
+      run: echo ::set-env name=MINECRAFT_VERSION::${GITHUB_REF#refs/*/}
 
     - name: Build and push Docker images
       uses: docker/build-push-action@v1.1.0
@@ -47,7 +50,7 @@ jobs:
         # Always attempt to pull a newer version of the image
         always_pull: true
         # Comma-delimited list of build-time variables
-        build_args: MINECRAFT_VERSION=${GITHUB_REF/refs\/tags\//}
+        build_args: MINECRAFT_VERSION=${{ github.ref GITHUB_REF/refs\/tags\// }}
         # Comma-delimited list of images to consider as cache sources
         #cache_froms: # optional
         # Comma-delimited list of labels to add to the built image
