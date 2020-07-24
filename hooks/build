@@ -1,0 +1,2 @@
+#!/bin/sh
+docker build --tag ${IMAGE_NAME} --build-arg MINECRAFT_VERSION=${DOCKER_TAG} .
